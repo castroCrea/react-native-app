@@ -14,7 +14,7 @@
     <key>FacebookAppID</key>
     <string>418675955209048</string>
     <key>FacebookDisplayName</key>
-    <string>Union</string>
+    <string>union</string>
     <key>LSApplicationQueriesSchemes</key>
     <array>
       <string>fbapi</string>

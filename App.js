@@ -19,6 +19,8 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
+var FBLoginButton = require('./FBLoginButton');
+
 type Props = {};
 export default class App extends Component<Props> {
   render() {
@@ -33,6 +35,7 @@ export default class App extends Component<Props> {
         <Text style={styles.instructions}>
           {instructions}
         </Text>
+        <FBLoginButton />
       </View>
     );
   }
