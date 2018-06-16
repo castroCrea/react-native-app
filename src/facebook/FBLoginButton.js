@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { LoginButton, AccessToken } from 'react-native-fbsdk';
-import InitUser  from '../user/InitUser';
+import InitUser  from './user/InitUser';
 
 export default class FBLoginButton extends Component {
     render() {
@@ -16,11 +16,11 @@ export default class FBLoginButton extends Component {
                                 alert("Login was cancelled");
                             } else {
                                 AccessToken.getCurrentAccessToken().then((data) => {
-                                    console.log('mlk');
                                     const { accessToken } = data;
                                     console.log(accessToken);
-                                    var initUserObject = new InitUser();
-                                    initUserObject.init(accessToken);
+                                    const initUserObject = new InitUser();
+                                    const user = initUserObject.init(accessToken);
+                                    console.log(user);
                                 });
                             }
                         }
