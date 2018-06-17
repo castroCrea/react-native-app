@@ -11,16 +11,13 @@ export default class FBLoginButton extends Component {
                     onLoginFinished={
                         (error, result) => {
                             if (error) {
-                                alert("Login failed with error: " + error.message);
+                                console.log("Login failed with error: " + error.message);
                             } else if (result.isCancelled) {
-                                alert("Login was cancelled");
+                                console.log("Login was cancelled");
                             } else {
                                 AccessToken.getCurrentAccessToken().then((data) => {
                                     const { accessToken } = data;
-                                    console.log(accessToken);
-                                    const initUserObject = new InitUser();
-                                    const user = initUserObject.init(accessToken);
-                                    console.log(user);
+                                    new InitUser(accessToken);
                                 });
                             }
                         }
