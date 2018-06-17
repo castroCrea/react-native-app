@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { LoginButton, AccessToken } from 'react-native-fbsdk';
-import InitUser  from './user/InitUser';
+import InitUser  from '../user/InitUser';
 
 export default class FBLoginButton extends Component {
     render() {

@@ -19,7 +19,7 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
-var FBLoginButton = require('./FBLoginButton');
+var FBLoginButton = require('./facebook/FBLoginButton');
 
 type Props = {};
 export default class App extends Component<Props> {
