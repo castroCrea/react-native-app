@@ -9,8 +9,10 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  Button
 } from 'react-native';
+import User from './user/User';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -19,10 +21,15 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
-var FBLoginButton = require('./facebook/FBLoginButton');
+const FBLoginButton = require('./facebook/FBLoginButton');
+
 
 type Props = {};
 export default class App extends Component<Props> {
+    clickButton(){
+        const user = new User;
+        user.registerAction();
+    }
   render() {
     return (
       <View style={styles.container}>
@@ -35,6 +42,12 @@ export default class App extends Component<Props> {
         <Text style={styles.instructions}>
           {instructions}
         </Text>
+          <Button
+              onPress={this.clickButton}
+              title="Learn More"
+              color="#841584"
+              accessibilityLabel="Learn more about this purple button"
+          />
         <FBLoginButton />
       </View>
     );

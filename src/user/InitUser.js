@@ -18,14 +18,10 @@ export default class InitUser extends Component {
         // create a new firebase credential with the token
         const credential = firebase.auth.FacebookAuthProvider.credential(token);
         // login with credential
-        const currentUser = await firebase.auth().signInAndRetrieveDataWithCredential(credential)
+        await firebase.auth().signInAndRetrieveDataWithCredential(credential)
             .then(function (currentUser) {
-                AsyncStorage.setItem("user", JSON.stringify(currentUser.user.toJSON()));
+                AsyncStorage.setItem("user.uid", currentUser.user.toJSON().uid);
                 return currentUser.user.toJSON();
             });
-    }
-
-    async getUser(){
-        return await AsyncStorage.getItem("user");
     }
 }
