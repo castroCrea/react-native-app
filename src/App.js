@@ -12,7 +12,8 @@ import {
   View,
   Button
 } from 'react-native';
-import User from './user/User';
+import GetUser from './user/GetUser';
+import User from './model/User';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -27,10 +28,10 @@ const FBLoginButton = require('./facebook/FBLoginButton');
 type Props = {};
 export default class App extends Component<Props> {
     clickButton(){
-        const user = new User;
-        user.registerAction();
+        const getUser = new GetUser;
+        getUser.registerAction();
     }
-  render() {
+    render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>

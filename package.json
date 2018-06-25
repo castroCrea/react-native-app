@@ -13,6 +13,7 @@
     "react-native": "0.55.4",
     "react-native-fbsdk": "^0.7.0",
     "react-native-firebase": "^4.2.0",
+    "react-native-uuid": "^1.4.9",
     "xcode": "^1.0.0"
   },
   "devDependencies": {

@@ -22,7 +22,7 @@ export default class FBLoginButton extends Component {
                             }
                         }
                     }
-                    readPermissions={["public_profile email"]}
+                    readPermissions={["public_profile email user_birthday user_gender user_photos"]}
                     onLogoutFinished={() => alert("User logged out")}/>
             </View>
         );
