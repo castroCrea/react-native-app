@@ -31,7 +31,6 @@ export default class InitUser extends Component {
                 const date = Date.now();
 
                 usersRef.child(uid).on('value', function(snapchot){
-                    console.log(snapchot.toJSON());
                     if (snapchot.toJSON() == null) {
                         user = new User(currentUser.additionalUserInfo.profile);
                         user.uid = uid;

@@ -4,16 +4,27 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest",
+    "postinstall": "rm ./node_modules/react-native/local-cli/core/__fixtures__/files/package.json"
   },
   "dependencies": {
     "adm-zip": "^0.4.11",
+    "eslint": "^5.0.0",
+    "npm": "^6.1.0",
     "plist": "^3.0.1",
     "react": "^16.4.1",
     "react-native": "0.55.4",
+    "react-native-elements": "^0.19.1",
     "react-native-fbsdk": "^0.7.0",
     "react-native-firebase": "^4.2.0",
+    "react-native-safe-area-view": "^0.9.0",
     "react-native-uuid": "^1.4.9",
+    "react-native-vector-icons": "^4.6.0",
+    "react-navigation": "^2.5.2",
+    "react-navigation-deprecated-tab-navigator": "^1.3.0",
+    "react-navigation-drawer": "^0.4.2",
+    "react-navigation-material-bottom-tabs": "^0.3.0",
+    "react-navigation-tabs": "^0.5.1",
     "xcode": "^1.0.0"
   },
   "devDependencies": {
