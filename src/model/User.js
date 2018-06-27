@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import firebase from 'react-native-firebase';
 
 export default class User extends Component {
     uid = '';
@@ -12,6 +11,7 @@ export default class User extends Component {
     interestedBy = '';
     dateOfRegistration = '';
     dateOfLastConnection = '';
+    picture = '';
 
     constructor(data) {
         super(data);
@@ -30,6 +30,7 @@ export default class User extends Component {
             'interestedBy': this.interestedBy,
             'dateOfRegistration': this.dateOfRegistration,
             'dateOfLastConnection': this.dateOfLastConnection,
+            'picture': this.picture,
         }
     }
 

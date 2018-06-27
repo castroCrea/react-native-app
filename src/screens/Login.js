@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import {View, Text, StyleSheet, AsyncStorage} from 'react-native';
+import {View, Text, AsyncStorage} from 'react-native';
 import { LoginButton, AccessToken } from 'react-native-fbsdk';
 import User from "../model/User";
 import firebase from 'react-native-firebase';
+import { styles } from "../styles/styles";
 
 export default class Login extends Component {
 
@@ -27,6 +28,7 @@ export default class Login extends Component {
                                 AccessToken.getCurrentAccessToken().then((data) => {
                                     const { accessToken } = data;
                                     this.setContent(accessToken);
+                                    /** After login redirect to App who gona redirect ot the list page if user is logged */
                                     this.props.navigation.navigate('App');
                                 });
                             }
@@ -41,6 +43,13 @@ export default class Login extends Component {
         );
     }
 
+    /**
+     * We send the token to firebase auth to register the user in the firebase auth
+     * We register some data in the fire base database
+     * We register some data in the locale Storage of the user
+     *
+     * @param token
+     */
     setContent(token) {
         // create a new firebase credential with the token
         const credential = firebase.auth.FacebookAuthProvider.credential(token);
@@ -60,12 +69,15 @@ export default class Login extends Component {
                     if (snapshot.toJSON() == null) {
                         user = new User(currentUser.additionalUserInfo.profile);
                         user.uid = uid;
+                        user.picture = currentUser.additionalUserInfo.profile.picture.data.url;
                         user.dateOfLastConnection = date;
                         user.dateOfRegistration = date;
                         //set the new user in database
                         usersRef.child(uid).set(user.getUser());
                     } else {
                         usersRef.child(uid).child('dateOfLastConnection').set(date);
+                        /** We update the data of the user, mostly his picture */
+                        usersRef.child(uid).child('picture').set(currentUser.additionalUserInfo.profile.picture.data.url);
                         user = new User(snapshot.toJSON());
                     }
                     //Store user data in local Storage
@@ -76,17 +88,3 @@ export default class Login extends Component {
     }
 
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF',
-    },
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
-    },
-});

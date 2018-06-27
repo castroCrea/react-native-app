@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { SignedIn, SignedOut } from './nav/Router';
 import { AccessToken } from 'react-native-fbsdk';
+import UserPosition from './model/UserPosition';
 
 type Props = {};
 
@@ -18,7 +19,10 @@ export default class App extends Component<Props> {
             (data) => {
                 if (data) {
                     this.setState({signedIn: true});
-                    this.props.navigator.navigate('TimeLine')
+                    this.props.navigator.navigate('TimeLine');
+                    console.log('mlk');
+                    new UserPosition();
+
                 }
 
             });
