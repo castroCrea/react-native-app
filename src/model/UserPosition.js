@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { AsyncStorage } from 'react-native';
 import firebase from 'react-native-firebase';
+import {positionFilter} from '../filter/position';
 
 export default class UserPosition extends Component {
     userId = '';
@@ -10,6 +11,8 @@ export default class UserPosition extends Component {
     positionLat = '';
     positionLong = '';
     dateOnPosition = '';
+    nbOfKids = '';
+    filters = '';
 
     constructor(data) {
         super(data);
@@ -21,6 +24,8 @@ export default class UserPosition extends Component {
         /** push to the firebase data base on positions document */
         this.setUserPosition().done(() => {
             this.setUserData().done(() => {
+                /** create value for the filter */
+                this.filters = positionFilter(this.dateOnPosition,this.positionLat, this.positionLong);
                 positionRef.push(this.getUserPosition());
             })
         });
@@ -46,15 +51,14 @@ export default class UserPosition extends Component {
     };
     /** set basic user data form the locale storage */
     async setUserData(){
-        console.log('mlk5');
         const self = this;
         return await AsyncStorage.getItem("user").then(function (user) {
             const userJson = JSON.parse(user);
-            console.log(userJson);
             self.userId = userJson.uid;
             self.name = userJson.name;
             self.picture = userJson.picture;
             self.gender = userJson.gender;
+            self.nbOfKids = userJson.nbOfKids;
 
         })
     }
@@ -68,6 +72,8 @@ export default class UserPosition extends Component {
             'positionLat': this.positionLat,
             'positionLong': this.positionLong,
             'dateOnPosition': this.dateOnPosition,
+            'nbOfKids': this.nbOfKids,
+            'filters': this.filters
         }
     }
 

@@ -7,7 +7,7 @@ export default class User extends Component {
     email = '';
     birthday = '';
     gender = '';
-    nbOfKid = '';
+    nbOfKids = '';
     interestedBy = '';
     dateOfRegistration = '';
     dateOfLastConnection = '';
@@ -26,7 +26,7 @@ export default class User extends Component {
             'email': this.email,
             'dateOfBirths': this.birthday,
             'gender': this.gender,
-            'nbOfKid': this.nbOfKid,
+            'nbOfKids': this.nbOfKids,
             'interestedBy': this.interestedBy,
             'dateOfRegistration': this.dateOfRegistration,
             'dateOfLastConnection': this.dateOfLastConnection,

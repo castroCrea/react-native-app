@@ -3,11 +3,14 @@ import {View, Button, StyleSheet, ScrollView, WebView} from 'react-native';
 import { LoginButton } from 'react-native-fbsdk';
 import UserPosition from "../model/UserPosition";
 import { styles } from "../styles/styles";
+import UserProvider from "../provider/UserProvider";
 
 export default class List extends Component {
 
     constructor(props){
         super(props);
+        const u = new UserProvider();
+        u.getUsers();
     }
 
     render() {
@@ -40,6 +43,7 @@ export default class List extends Component {
     runJSInBackground () {
         setInterval(function () {
             new UserPosition();
-        }, 9000000);
+            console.log('flash');
+        }, 300000);
     }
 }
