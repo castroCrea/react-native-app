@@ -27,10 +27,24 @@ export default class User extends Component {
             'dateOfBirths': this.birthday,
             'gender': this.gender,
             'nbOfKids': this.nbOfKids,
-            'interestedBy': this.interestedBy,
+            'interestedBy': this.getInterestedBy(),
             'dateOfRegistration': this.dateOfRegistration,
             'dateOfLastConnection': this.dateOfLastConnection,
             'picture': this.picture,
+        }
+    }
+
+    /**
+     * get the default interested By (opposite to the current sex get in facebook)
+     * @returns {string}
+     */
+    getInterestedBy(){
+        if ('' === this.interestedBy) {
+            if (this.gender === 'male') {
+                return 'female';
+            } else {
+                return 'male';
+            }
         }
     }
 

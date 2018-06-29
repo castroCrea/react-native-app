@@ -8,6 +8,7 @@ import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.analytics.RNFirebaseAnalyticsPackage;
 import io.invertase.firebase.auth.RNFirebaseAuthPackage;
 import io.invertase.firebase.database.RNFirebaseDatabasePackage;
+import io.invertase.firebase.firestore.RNFirebaseFirestorePackage;
 
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.facebook.react.ReactNativeHost;

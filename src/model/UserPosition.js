@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { AsyncStorage } from 'react-native';
 import firebase from 'react-native-firebase';
-import {positionFilter} from '../filter/position';
 
 export default class UserPosition extends Component {
     userId = '';
@@ -12,21 +11,18 @@ export default class UserPosition extends Component {
     positionLong = '';
     dateOnPosition = '';
     nbOfKids = '';
-    filters = '';
 
     constructor(data) {
         super(data);
         Object.assign(this, data);
         /** Set current time for the user position */
         this.dateOnPosition = new Date();
-        const rootRef = firebase.database().ref();
-        const positionRef = rootRef.child("positions");
+        const positionRef = firebase.firestore().collection('positions');
         /** push to the firebase data base on positions document */
         this.setUserPosition().done(() => {
             this.setUserData().done(() => {
                 /** create value for the filter */
-                this.filters = positionFilter(this.dateOnPosition,this.positionLat, this.positionLong);
-                positionRef.push(this.getUserPosition());
+                positionRef.add(this.getUserPosition());
             })
         });
     }
@@ -49,6 +45,7 @@ export default class UserPosition extends Component {
                 options);
         });
     };
+
     /** set basic user data form the locale storage */
     async setUserData(){
         const self = this;
@@ -72,13 +69,7 @@ export default class UserPosition extends Component {
             'positionLat': this.positionLat,
             'positionLong': this.positionLong,
             'dateOnPosition': this.dateOnPosition,
-            'nbOfKids': this.nbOfKids,
-            'filters': this.filters
+            'nbOfKids': this.nbOfKids
         }
-    }
-
-    /** retrieve a JSon file of the data */
-    getJson() {
-        return JSON.stringify(this.getUserPosition());
     }
 }

@@ -60,29 +60,31 @@ export default class Login extends Component {
                 const uid = currentUser.user.toJSON().uid;
 
                 //log into database
-                let rootRef = firebase.database().ref();
-                let usersRef = rootRef.child("users");
+                let usersRef = firebase.firestore().collection('users');
                 let user = {};
                 const date = Date.now();
 
-                usersRef.child(uid).on('value', function(snapshot){
-                    if (snapshot.toJSON() == null) {
+                usersRef.doc(uid).get().then( doc => {
+                    if (!doc.exists) {
                         user = new User(currentUser.additionalUserInfo.profile);
                         user.uid = uid;
                         user.picture = currentUser.additionalUserInfo.profile.picture.data.url;
                         user.dateOfLastConnection = date;
                         user.dateOfRegistration = date;
                         //set the new user in database
-                        usersRef.child(uid).set(user.getUser());
+                        usersRef.doc(uid).set(user.getUser());
                     } else {
-                        usersRef.child(uid).child('dateOfLastConnection').set(date);
+
+                        var batch = firebase.firestore().batch();
+                        batch.update(usersRef.doc(uid), {
+                            dateOfLastConnection: date,
+                            picture: currentUser.additionalUserInfo.profile.picture.data.url
+                        });
                         /** We update the data of the user, mostly his picture */
-                        usersRef.child(uid).child('picture').set(currentUser.additionalUserInfo.profile.picture.data.url);
-                        user = new User(snapshot.toJSON());
+                        user = new User(doc);
                     }
                     //Store user data in local Storage
                     AsyncStorage.setItem("user", user.getJson());
-                    usersRef.child(uid).off();
                 });
             });
     }
