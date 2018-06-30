@@ -1,25 +1,24 @@
 import {Component} from "react";
 import {AsyncStorage} from "react-native";
-import firebase from 'react-native-firebase';
+import {getCrossUser, getFilters} from '../query/ListQuery';
 
 export default class UserProvider extends Component {
-    userLastPosition = {};
-
-    async getUsers(numberOfCurrentUserPosition = 2) {
-        const self = this;
-        return await AsyncStorage.getItem("user").then(function (user) {
-            const uid = JSON.parse(user).uid;
-
-            const positionRef = firebase.firestore().collection('positions');
-            /** get the 3 last position of the current user */
-            // positionRef.orderByChild('filters').equalTo(uid).limitToLast(numberOfCurrentUserPosition).on("value", function(snapshot) {
-            //     console.log(snapshot.toJSON());
-            //     //TODO: get the user with the same filter 1 and 2
-            //     //TODO: remove if the current user is on it
-            //     //TODO: remove the logic if the user get child everyone if not only user with child
-            //     //TODO: remove duplicated user
-            // });
-
+    getUsers(numberOfCurrentUserPosition = 4) {
+        return new Promise(function (resolve, reject) {
+            AsyncStorage.getItem("user").then(function (user) {
+                const userStorage = JSON.parse(user);
+                AsyncStorage.getItem("filters").then(function (filters) {
+                    const filtersStorage = (JSON.parse(filters) == null) ? [] : JSON.parse(filters);
+                    const crossUser = getCrossUser(filtersStorage, userStorage, numberOfCurrentUserPosition);
+                    crossUser.then(
+                        function (crossUser) {
+                            resolve(crossUser);
+                        }
+                    ).catch(function () {
+                        console.log('no result');
+                    });
+                });
+            });
         });
     }
 }

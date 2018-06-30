@@ -72,7 +72,7 @@ export default class Login extends Component {
                         user.dateOfLastConnection = date;
                         user.dateOfRegistration = date;
                         //set the new user in database
-                        usersRef.doc(uid).set(user.getUser());
+                        usersRef.doc('SF').set(user.getUser());
                     } else {
 
                         var batch = firebase.firestore().batch();

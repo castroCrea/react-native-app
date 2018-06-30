@@ -9,21 +9,26 @@ export default class List extends Component {
 
     constructor(props){
         super(props);
+        new UserPosition();
         const u = new UserProvider();
-        u.getUsers();
+        const crossUser = u.getUsers();
+        crossUser.then(
+            function (crossUser) {
+                console.log(crossUser);
+            }
+        )
     }
 
     render() {
-        new UserPosition();
-        const { navigate } = this.props.navigation;
         return (
             <View style={styles.container}>
                 <ScrollView style={{flex:2}}>
                     <Button
                         style={styles.container}
                         title="Go to Jane's profile"
-                        onPress={() =>
-                            navigate('Profile', { name: 'Jane' })
+                        onPress={() => {
+                               console.log('ml');
+                            }
                         }
                     />
                     <LoginButton />
@@ -43,7 +48,6 @@ export default class List extends Component {
     runJSInBackground () {
         setInterval(function () {
             new UserPosition();
-            console.log('flash');
-        }, 300000);
+        }, 1800000);
     }
 }

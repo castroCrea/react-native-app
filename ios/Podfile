@@ -8,7 +8,6 @@ target 'union' do
   # Pods for union
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
-  pod 'Firebase/Database'
   pod 'Firebase/Firestore'
 
 
