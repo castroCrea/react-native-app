@@ -1,6 +1,6 @@
 import React from "react";
 import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
-import List from "../screens/List";
+import List_with_facto_doesnT_work from "../screens/List";
 import UserProfile from "../screens/UserProfile";
 import Login from "../screens/Login";
 import Icon from  "react-native-vector-icons/FontAwesome";
@@ -9,7 +9,7 @@ import Icon from  "react-native-vector-icons/FontAwesome";
 export const SignedIn = createBottomTabNavigator(
     {
         TimeLine: {
-            screen: List,
+            screen: List_with_facto_doesnT_work,
             navigationOptions: {
                 tabBarLabel: 'Feed',
                 tabBarIcon: ({ tintColor }) => <Icon name="list" size={30} color={tintColor} />

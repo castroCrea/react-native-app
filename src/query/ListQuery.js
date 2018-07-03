@@ -1,5 +1,6 @@
 import firebase from 'react-native-firebase';
 
+/** Useless because factorisation doesn't work on rendering my list */
 const positionRef = firebase.firestore().collection('positions');
 
 /**
@@ -53,7 +54,11 @@ export function getCrossUser(filterList, userStorage, numberOfCurrentUserPositio
                         let crossUser = doc.data();
                         let crossUserUid = doc.data().userId;
                         if (typeof crossUserList[crossUserUid] === 'undefined') {
-                            crossUserList[crossUserUid] = crossUser;
+                            crossUserList.push({
+                                name: crossUser.name,
+                                _key: crossUserUid
+                            });
+                            // crossUserList[crossUserUid] = crossUser;
                         }
                     });
                     resolve(crossUserList);
