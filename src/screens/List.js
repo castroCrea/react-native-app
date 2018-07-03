@@ -82,9 +82,6 @@ export default class List extends Component {
                     {rowData.name}
                 </Text>
                 <Text>
-                    {rowData.picture}
-                </Text>
-                <Text>
                     {rowData.userId}
                 </Text>
             </View>
